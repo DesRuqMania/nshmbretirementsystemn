@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Retirement Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <img src="nshmb_logo.png" alt="NSHMB Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <h1>NSHMB <span class="badge">Retirement System</span></h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" id="btn-upload">Upload Records</button>
+                <button class="nav-btn" id="btn-retirees">Eligible Retirees</button>
+                <button class="nav-btn" id="btn-reports">Reports</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section id="section-upload" class="content-section active">
+                <div class="hero-card">
+                    <h2>Staff Retirement Processing</h2>
+                    <p>Upload your staff records Excel file to identify those due for retirement this year based on age (60) or years of service (35).</p>
+                    
+                    <div class="upload-zone" id="drop-zone">
+                        <div class="upload-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p>Drag and drop your Excel file here, or <span class="highlight">browse</span></p>
+                        <input type="file" id="file-input" accept=".xlsx, .xls, .csv" hidden>
+                        <button class="primary-btn" id="browse-btn">Select File</button>
+                    </div>
+
+                    <div class="requirements-info">
+                        <h3>File Requirements:</h3>
+                        <ul>
+                            <li>Column: <strong>Staff Name</strong></li>
+                            <li>Column: <strong>Date of Birth</strong> (DOB)</li>
+                            <li>Column: <strong>Date of First Appointment</strong> (DOFA)</li>
+                            <li>Column: <strong>Staff ID / Unique ID</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Retirees List Section -->
+            <section id="section-retirees" class="content-section">
+                <div class="section-header">
+                    <h2>Eligible Retirees for <span id="current-year">2024</span></h2>
+                    <div class="actions">
+                        <button class="secondary-btn" id="export-btn">Export CSV</button>
+                        <button class="primary-btn" id="print-btn">Print Report</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Staff Processed</div>
+                        <div class="stat-value" id="total-processed">0</div>
+                    </div>
+                    <div class="stat-card highlight">
+                        <div class="stat-label">Due for Retirement</div>
+                        <div class="stat-value" id="due-retirement">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Retiring by Age</div>
+                        <div class="stat-value" id="retire-age">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Retiring by Service</div>
+                        <div class="stat-value" id="retire-service">0</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="retirees-table">
+                        <thead>
+                            <tr>
+                                <th>Staff ID</th>
+                                <th>Name</th>
+                                <th>DOB</th>
+                                <th>DOFA</th>
+                                <th>Retirement Date</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="retirees-body">
+                            <!-- Data will be populated here -->
+                            <tr class="empty-state">
+                                <td colspan="7">No records uploaded yet. Please upload a file to see results.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Reports Section (Simplified for now) -->
+            <section id="section-reports" class="content-section">
+                <div class="hero-card">
+                    <h2>Retirement Reports</h2>
+                    <p>Generate detailed summaries and statistics of staff retirement trends.</p>
+                    <div class="placeholder-content">
+                        <div class="empty-illustration">📊</div>
+                        <p>Detailed reports will appear here after data processing.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Notification Toast -->
+        <div id="toast" class="toast">File uploaded successfully!</div>
+    </div>
+
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
